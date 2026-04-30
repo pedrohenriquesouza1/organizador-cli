@@ -1,10 +1,11 @@
 import fs from "node:fs"
 import { select } from "@inquirer/prompts"
 import path, { join } from "node:path"
-import { mkdir } from "node:fs/promises" //essa lib tem pouca informação disponível (que eu encontrei), vou tentar achar mais coisas no futuro
+import { mkdir } from "node:fs/promises"
+//acabei por não utilizar essa biblioteca (mkdir), mas vou manter para, caso eu faça uma nova atualização, eu consiga facilmente aplica, pois essa lib é vasta
 
-let raizPath = process.argv[2]
-let archivePath = process.argv[3]
+let raizPath = process.argv[3]
+let archivePath = process.argv[2]
 
 if (raizPath == undefined || archivePath == undefined) {
     console.log("Arquivo não encontrado, tente novamente com outro caminho")
@@ -27,11 +28,11 @@ if(fs.existsSync(archivePath)) {
         }
     ]
    });
-   const destino = path.join(raizPath, resMaterno_Paterno)
-   
-   if(fs.existsSync(destino)) {
-        //pensando se, na arquitetura, vale a pena manter esse if para seguir código claro e legível
-   }
+   const destino = path.join(raizPath, resMaterno_Paterno);
+   let archiveDes = path.join(destino, path.basename(archivePath))
+
+   fs.mkdirSync(destino, {recursive: true});
+   fs.renameSync(archivePath, archiveDes);
 } else {
     console.log("O Arquivo que colocou não existe, veja se não errou o nome e tente novamente") 
     process.exit(1)
