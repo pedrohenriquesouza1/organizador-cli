@@ -1,14 +1,15 @@
 import fs from "node:fs"
 import { select } from "@inquirer/prompts"
 import path, { join } from "node:path"
-import { mkdir } from "node:fs/promises"
-//acabei por não utilizar essa biblioteca (mkdir), mas vou manter para, caso eu faça uma nova atualização, eu consiga facilmente aplica, pois essa lib é vasta
+import chalk from "chalk"
 
 let raizPath = process.argv[3]
 let archivePath = process.argv[2]
+const success = chalk.bold.green
+const err = chalk.underline.red
 
 if (raizPath == undefined || archivePath == undefined) {
-    console.log("Arquivo não encontrado, tente novamente com outro caminho")
+    console.log(err("Arquivo não encontrado, tente novamente com outro caminho"))
     process.exit(1) 
 }
 
@@ -33,7 +34,8 @@ if(fs.existsSync(archivePath)) {
 
    fs.mkdirSync(destino, {recursive: true});
    fs.renameSync(archivePath, archiveDes);
+   console.log(success("O arquivo foi movido com sucesso!"))
 } else {
-    console.log("O Arquivo que colocou não existe, veja se não errou o nome e tente novamente") 
+    console.log(err("O Arquivo que colocou não existe, veja se não errou o nome e tente novamente"))
     process.exit(1)
 } 
