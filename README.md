@@ -43,4 +43,4 @@ Segue um exemplo de utilização
 ![demo](demo.gif)
 
 ## Licença
-A licença desse projeto está disponível no arquivo ![License](LICENCE).
+A licença desse projeto está disponível no arquivo [License](LICENCE).
