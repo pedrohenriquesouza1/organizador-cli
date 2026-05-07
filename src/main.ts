@@ -1,7 +1,10 @@
 import fs from "node:fs"
 import { select } from "@inquirer/prompts"
-import path, { join } from "node:path"
+import path from "node:path"
 import chalk from "chalk"
+import { destino } from "./org.js"
+import { unifier } from "./org.js"
+import { toUnicode } from "node:punycode"
 
 let raizPath = process.argv[3]
 let archivePath = process.argv[2]
@@ -29,10 +32,10 @@ if(fs.existsSync(archivePath)) {
         }
     ]
    });
-   const destino = path.join(raizPath, resMaterno_Paterno);
-   let archiveDes = path.join(destino, path.basename(archivePath))
+    const caminhoDes = destino(raizPath, resMaterno_Paterno)
+    let archiveDes = unifier(caminhoDes, archivePath)
 
-   fs.mkdirSync(destino, {recursive: true});
+   fs.mkdirSync(caminhoDes, {recursive: true});
    fs.renameSync(archivePath, archiveDes);
    console.log(success("O arquivo foi movido com sucesso!"))
 } else {
