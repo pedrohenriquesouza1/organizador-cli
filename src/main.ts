@@ -1,10 +1,8 @@
 import fs from "node:fs"
 import { select } from "@inquirer/prompts"
-import path from "node:path"
 import chalk from "chalk"
 import { destino } from "./org.js"
 import { unifier } from "./org.js"
-import { toUnicode } from "node:punycode"
 
 let raizPath = process.argv[3]
 let archivePath = process.argv[2]
