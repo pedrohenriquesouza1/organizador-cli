@@ -12,6 +12,12 @@ describe('unifica paths', () => {
     });
 });
 
+describe('path correto teste', () => {
+    test('testa os paths corretos para a função validator', ( () => {
+        expect(validator('"documentos de antepassados"', 'Downloads/certidao.png')).toBe(true)
+    }));
+});
+
 describe('testa função validator', () => {
     test('testa um código de erro da função validator', () => {
         expect(() => {
